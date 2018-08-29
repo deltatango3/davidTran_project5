@@ -21,6 +21,7 @@ class LocationSearchForm extends Component {
     e.preventDefault();
     //Pass the location that is submitted back to the APP function that makes the axios call.
     // Make a function in the APP that makes the call
+    this.props.returnPetsByLocation();
   }
   render() {
     return(

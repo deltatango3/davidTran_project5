@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import Qs from 'qs';
@@ -7,18 +6,31 @@ import Qs from 'qs';
 // Components
 import Header from './components/header/Header';
 import LocationSearchForm from './components/location-search/LocationSearch';
+import Gallery from './components/gallery/Gallery';
 
 const apiURL = 'https://api.petfinder.com/pet.find';
 const apiKey = '03e269d9ab2bafaf6f5ace0f1ee278f1';
 
 class App extends Component {
-  componentDidMount() {
+  constructor() {
+    super();
+    this.state = {
+      petList: [],
+    }
+  }
+  //returnPetsByLocation is called by LocationSearch. It makes the axios to return X number of pets by location.
+  //NEXT: I must display 5 random pets. Grab Five random animsl from the call. 
+  //HOW: Do I pass this calls return to a new component called pet card and map it out?
+  returnPetsByLocation = () => {
+    console.log('return pets by location is called');
     axios({
       url: 'http://proxy.hackeryou.com',
       method: 'GET',
       dataResponse: 'json',
-      paramsSerializer: function(params) {
-        return Qs.stringify(params, { arrayFormat: 'brackets' })
+      paramsSerializer: function (params) {
+        return Qs.stringify(params, {
+          arrayFormat: 'brackets'
+        })
       },
       params: {
         reqUrl: apiURL,
@@ -36,14 +48,44 @@ class App extends Component {
         xmlToJSON: false
       }
     }).then(({data}) => {
-      console.log(data);
+      //pass data to a randomizer function.
+      // console.log(data.petfinder.pets);
+      const pets = data.petfinder.pets.pet;
+      this.chooseRandomPets(pets);
+    })
+  }
+  //Returns 5 random pets from the list.
+  chooseRandomPets = (pets) => {
+    console.log('choose random pets is called');
+    let randomPet;
+    let randomPets = [];
+    for (let i = 0; i <= 4; i++) {
+      randomPet = pets[Math.floor(Math.random() * pets.length)];
+      randomPets.push(randomPet);
+    }
+    //Pass the randomly selected pets into another function that will grab the info needed and set the state of petlist
+    this.getPetInfo(randomPets);
+  }
+  getPetInfo = (pets) => {
+    console.log('get pet info is called')
+    console.log(pets);
+    const petsArray = pets.map((pet) => {
+      return({
+        name: pet.name,
+        age: pet.age,
+        breed: pet.breeds.breed
+      })
+    })
+    this.setState({
+      petList: petsArray
     })
   }
   render() {
     return (
       <div className="App">
-        <Header/>
-        <LocationSearchForm />
+        <Header />
+        <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} />
+        <Gallery petList={this.state.petList}/>
       </div>
     );
   }
