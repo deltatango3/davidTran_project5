@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header/Header';
 import axios from 'axios';
 import Qs from 'qs';
+
+// Components
+import Header from './components/header/Header';
+import LocationSearchForm from './components/location-search/LocationSearch';
 
 const apiURL = 'https://api.petfinder.com/pet.find';
 const apiKey = '03e269d9ab2bafaf6f5ace0f1ee278f1';
@@ -40,6 +43,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header/>
+        <LocationSearchForm />
       </div>
     );
   }
