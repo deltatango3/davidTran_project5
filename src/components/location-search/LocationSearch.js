@@ -23,11 +23,11 @@ class LocationSearchForm extends Component {
     // Make a function in the APP that makes the call
     this.props.returnPetsByLocation(this.state.location);
   }
-  render() {
+  render() {  
     return(
       <form onSubmit={this.locationSubmit}>
         <label htmlFor="location-search"></label>
-        <input onChange={this.locationChange} id="location" type="text" placeholder="Location (City, Provice)"/>
+        <input onChange={this.locationChange} id="location" type="text" required placeholder="Location (City, Provice)"/>
         <input type="submit" value="Search this location"/>
       </form>
     )

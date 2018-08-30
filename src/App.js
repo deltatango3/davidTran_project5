@@ -53,22 +53,24 @@ class App extends Component {
       this.chooseRandomPets(pets);
     })
   }
+  petRandomizer = () => {
+
+  }
   //Returns 5 random pets from the list.
   chooseRandomPets = (pets) => {
-    console.log('choose random pets is called');
-    let randomPet;
     let randomPets = [];
-    for (let i = 0; i <= 4; i++) {
-      randomPet = pets[Math.floor(Math.random() * pets.length)];
+    for (let i = 0; i < 5; i++) {
+      let randomIndex = [Math.floor(Math.random() * pets.length)];
+      let randomPet = pets[randomIndex];
       randomPets.push(randomPet);
+      pets.splice(randomIndex, 1);
     }
     //Pass the randomly selected pets into another function that will grab the info needed and set the state of petlist
     this.getPetInfo(randomPets);
   }
   getPetInfo = (pets) => {
-    console.log('get pet info is called')
+    // console.log('get pet info is called')
     const petsArray = pets.map((pet) => {
-      console.log(pet);
       return({
         id: pet.id,
         name: pet.name,
