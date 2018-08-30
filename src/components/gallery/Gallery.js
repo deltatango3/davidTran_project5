@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Gallery = (props) => {
-  console.log(props);
   return(
     <section className = "gallery" >
       <h2>Gallery</h2>
@@ -10,7 +9,13 @@ const Gallery = (props) => {
           <div className="pet">
             <h3>{pet.name.$t}</h3>
             <p>{pet.age.$t}</p>
-            <p>{pet.breed.$t}</p>
+            {/* Checking if the returned pet has multiple breeds in an array */}
+            <p>Breed(s): {Array.isArray(pet.breed) ?
+              pet.breed.map((breeds) => {
+                return `${breeds.$t} `;
+              })
+              : pet.breed.$t
+              }</p>
           </div>
         )
       })}

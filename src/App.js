@@ -68,12 +68,29 @@ class App extends Component {
   }
   getPetInfo = (pets) => {
     console.log('get pet info is called')
-    console.log(pets);
+    // console.log(pets);
     const petsArray = pets.map((pet) => {
+      console.log(pet);
       return({
         name: pet.name,
         age: pet.age,
-        breed: pet.breeds.breed
+        breed: pet.breeds.breed,
+        // breed: (() => {
+        //   if (Array.isArray(pet.breeds.breed) === true) {
+        //     pet.breeds.breed.map((breed) => {
+        //       console.log(breed);
+        //       return breed;
+        //     })
+        //   } else {
+        //     return pet.breeds.breed;
+        //   }
+        // })
+        // breed: Array.isArray(pet.breeds.breed) ? 
+        //   pet.breeds.breed.map((breed) => {
+        //     // console.log(breed) 
+        //     breed
+        //   })
+        //   : pet.breeds.breed,
       })
     })
     this.setState({
@@ -85,7 +102,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} />
-        <Gallery petList={this.state.petList}/>
+        <Gallery petList={this.state.petList} />
       </div>
     );
   }
