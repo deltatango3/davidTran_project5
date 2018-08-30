@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import Qs from 'qs';
+import firebase from './components/firebase/firebase';
 
 // Components
 import Header from './components/header/Header';
@@ -11,12 +12,25 @@ import Gallery from './components/gallery/Gallery';
 const apiURL = 'https://api.petfinder.com/pet.find';
 const apiKey = '03e269d9ab2bafaf6f5ace0f1ee278f1';
 
+const dbRef = firebase.database().ref();
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
       petList: [],
+      favouritePets: [],
     }
+  }
+  componentDidMount() {
+    console.log('Component did mount is called');
+
+    dbRef.on('value', (snapshot) => {
+      // console.log(snapshot.val());
+      this.setState({
+        favouritePets: snapshot.val(),
+      })
+    })
   }
   //returnPetsByLocation is called by LocationSearch. It makes the axios to return X number of pets by location.
   //NEXT: I must display 5 random pets. Grab Five random animsl from the call. 
@@ -53,9 +67,6 @@ class App extends Component {
       this.chooseRandomPets(pets);
     })
   }
-  petRandomizer = () => {
-
-  }
   //Returns 5 random pets from the list.
   chooseRandomPets = (pets) => {
     let randomPets = [];
@@ -71,15 +82,29 @@ class App extends Component {
   getPetInfo = (pets) => {
     // console.log('get pet info is called')
     const petsArray = pets.map((pet) => {
+      const photos = pet.media.photos.photo.filter((photo) => {
+        return photo[`@size`] === 'x';
+      });
       return({
         id: pet.id,
         name: pet.name,
         age: pet.age,
         breed: pet.breeds.breed,
+        photo: photos[0],
       })
     })
     this.setState({
       petList: petsArray
+    })
+  }
+  addToFavourites = (pet) => {
+    console.log('add to favourites is called');
+    dbRef.push({
+      id: pet.id.$t,
+      name: pet.name.$t,
+      age: pet.age.$t,
+      // breed: pet.breed.$t,
+      photo: pet.photo.$t
     })
   }
   render() {
@@ -87,7 +112,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} />
-        <Gallery petList={this.state.petList} />
+        <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} />
       </div>
     );
   }
