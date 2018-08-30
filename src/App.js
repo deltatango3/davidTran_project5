@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import Qs from 'qs';
-import firebase from './components/firebase/firebase';
+import firebase from './firebase';
 
 // Components
 import Header from './components/header/Header';
@@ -99,11 +99,12 @@ class App extends Component {
   }
   addToFavourites = (pet) => {
     console.log('add to favourites is called');
+    console.log(pet.breed.$t);
     dbRef.push({
       id: pet.id.$t,
       name: pet.name.$t,
       age: pet.age.$t,
-      // breed: pet.breed.$t,
+      breed: pet.breed.$t || (pet.breed[0].$t && pet.breed[1].$t),
       photo: pet.photo.$t
     })
   }
@@ -117,7 +118,6 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;
 
