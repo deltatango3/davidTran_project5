@@ -6,7 +6,7 @@ const Gallery = (props) => {
       <h2>Gallery</h2>
       {props.petList.map((pet) => {
         return (
-          <div className="pet">
+          <div className="pet" key={pet.id.$t}>
             <h3>{pet.name.$t}</h3>
             <p>{pet.age.$t}</p>
             {/* Checking if the returned pet has multiple breeds in an array */}

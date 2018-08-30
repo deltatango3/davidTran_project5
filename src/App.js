@@ -21,7 +21,7 @@ class App extends Component {
   //returnPetsByLocation is called by LocationSearch. It makes the axios to return X number of pets by location.
   //NEXT: I must display 5 random pets. Grab Five random animsl from the call. 
   //HOW: Do I pass this calls return to a new component called pet card and map it out?
-  returnPetsByLocation = () => {
+  returnPetsByLocation = (location) => {
     console.log('return pets by location is called');
     axios({
       url: 'http://proxy.hackeryou.com',
@@ -38,7 +38,7 @@ class App extends Component {
           key: apiKey,
           format: 'json',
           output: 'full',
-          location: 'Toronto, ON',
+          location: location,
           animal: 'dog',
           count: 10,
         },
@@ -49,7 +49,6 @@ class App extends Component {
       }
     }).then(({data}) => {
       //pass data to a randomizer function.
-      // console.log(data.petfinder.pets);
       const pets = data.petfinder.pets.pet;
       this.chooseRandomPets(pets);
     })
@@ -68,29 +67,13 @@ class App extends Component {
   }
   getPetInfo = (pets) => {
     console.log('get pet info is called')
-    // console.log(pets);
     const petsArray = pets.map((pet) => {
       console.log(pet);
       return({
+        id: pet.id,
         name: pet.name,
         age: pet.age,
         breed: pet.breeds.breed,
-        // breed: (() => {
-        //   if (Array.isArray(pet.breeds.breed) === true) {
-        //     pet.breeds.breed.map((breed) => {
-        //       console.log(breed);
-        //       return breed;
-        //     })
-        //   } else {
-        //     return pet.breeds.breed;
-        //   }
-        // })
-        // breed: Array.isArray(pet.breeds.breed) ? 
-        //   pet.breeds.breed.map((breed) => {
-        //     // console.log(breed) 
-        //     breed
-        //   })
-        //   : pet.breeds.breed,
       })
     })
     this.setState({
@@ -107,6 +90,7 @@ class App extends Component {
     );
   }
 }
+
 
 export default App;
 
