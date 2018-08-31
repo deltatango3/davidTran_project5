@@ -4,11 +4,15 @@ import axios from 'axios';
 import Qs from 'qs';
 import firebase from './firebase';
 
+//Axios Calls
+import { getRandomPetData } from './axios.js';
+
 // Components
 import Header from './components/header/Header';
 import LocationSearchForm from './components/location-search/LocationSearch';
 import Gallery from './components/gallery/Gallery';
 import Favourites from './components/favourites/Favourites';
+import RandomPetButton from './components/random-pet-button/RandomPetButton';
 
 const apiURL = 'https://api.petfinder.com/pet.find';
 const apiKey = '03e269d9ab2bafaf6f5ace0f1ee278f1';
@@ -21,13 +25,11 @@ class App extends Component {
     this.state = {
       petList: [],
       favouritePets: [],
+      randomPet: [],
     }
   }
   componentDidMount() {
-    console.log('Component did mount is called');
-
     dbRef.on('value', (snapshot) => {
-      // console.log(snapshot.val());
       this.setState({
         favouritePets: snapshot.val(),
       })
@@ -37,7 +39,6 @@ class App extends Component {
   //NEXT: I must display 5 random pets. Grab Five random animsl from the call. 
   //HOW: Do I pass this calls return to a new component called pet card and map it out?
   returnPetsByLocation = (location) => {
-    console.log('return pets by location is called');
     axios({
       url: 'https://proxy.hackeryou.com',
       method: 'GET',
@@ -104,16 +105,15 @@ class App extends Component {
     let currentFavouritesID = new Set();
     
     dbRef.on('value', (snapshot) => {
-      currentFavourites = Object.entries(snapshot.val());
+      if (snapshot.val()) {
+        currentFavourites = Object.entries(snapshot.val());
+        currentFavourites.map((favourite) => {
+          currentFavouritesID.add(favourite[1].id)
+        })
+      }
     })
 
-    currentFavourites.map((favourite) => {
-      currentFavouritesID.add(favourite[1].id)
-    })
-
-    if (currentFavouritesID.has(pet.id.$t)) {
-      console.log('duplicate exists');
-    } else {
+    if (!currentFavouritesID.has(pet.id.$t)) {
       dbRef.push({
         // key: pet.id.$t,
         id: pet.id.$t,
@@ -122,19 +122,39 @@ class App extends Component {
         breed: pet.breed.$t || [pet.breed[0].$t, pet.breed[1].$t],
         photo: pet.photo.$t
       });
-    }
+    } 
   }
   removeFromFavourites = (petID) => {
     const petDbRef = firebase.database().ref(petID)
 
     petDbRef.remove();
   }
+  getRandomPet = () => {
+    console.log('get random pet is called');
+    getRandomPetData().then(({data}) => {
+      const pet = data.petfinder.pet;
+      this.displayRandomPet(pet);
+    })
+  }
+  displayRandomPet = (pet) => {
+    const randomPet = [{
+      id: pet.id,
+      name: pet.name,
+      age: pet.age,
+      breed: pet.breeds.breed,
+      photo: pet.media.photos.photo[0],
+    }]
+    this.setState({
+      randomPet: randomPet,
+    })
+  }
   render() {
     return (
       <div className="App">
         <Header />
         <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} />
-        <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} />
+        <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet}/>
+        <RandomPetButton getRandomPet={this.getRandomPet}/>
         <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites}/>
       </div>
     );
