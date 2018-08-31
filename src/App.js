@@ -8,6 +8,7 @@ import firebase from './firebase';
 import Header from './components/header/Header';
 import LocationSearchForm from './components/location-search/LocationSearch';
 import Gallery from './components/gallery/Gallery';
+import Favourites from './components/favourites/Favourites';
 
 const apiURL = 'https://api.petfinder.com/pet.find';
 const apiKey = '03e269d9ab2bafaf6f5ace0f1ee278f1';
@@ -98,15 +99,19 @@ class App extends Component {
     })
   }
   addToFavourites = (pet) => {
-    console.log('add to favourites is called');
-    console.log(pet.breed.$t);
     dbRef.push({
+      key: pet.id.$t,
       id: pet.id.$t,
       name: pet.name.$t,
       age: pet.age.$t,
-      breed: pet.breed.$t || (pet.breed[0].$t && pet.breed[1].$t),
+      breed: pet.breed.$t || [pet.breed[0].$t, pet.breed[1].$t],
       photo: pet.photo.$t
     })
+  }
+  removeFromFavourites = (petID) => {
+    const petDbRef = firebase.database().ref(petID)
+
+    petDbRef.remove();
   }
   render() {
     return (
@@ -114,6 +119,7 @@ class App extends Component {
         <Header />
         <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} />
         <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} />
+        <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites}/>
       </div>
     );
   }
