@@ -39,7 +39,7 @@ class App extends Component {
   returnPetsByLocation = (location) => {
     console.log('return pets by location is called');
     axios({
-      url: 'http://proxy.hackeryou.com',
+      url: 'https://proxy.hackeryou.com',
       method: 'GET',
       dataResponse: 'json',
       paramsSerializer: function (params) {
@@ -99,14 +99,30 @@ class App extends Component {
     })
   }
   addToFavourites = (pet) => {
-    dbRef.push({
-      key: pet.id.$t,
-      id: pet.id.$t,
-      name: pet.name.$t,
-      age: pet.age.$t,
-      breed: pet.breed.$t || [pet.breed[0].$t, pet.breed[1].$t],
-      photo: pet.photo.$t
+    //If my Favourites list (in the DB) has an animal with the pet.id already, dont add it. 
+    let currentFavourites;
+    let currentFavouritesID = new Set();
+    
+    dbRef.on('value', (snapshot) => {
+      currentFavourites = Object.entries(snapshot.val());
     })
+
+    currentFavourites.map((favourite) => {
+      currentFavouritesID.add(favourite[1].id)
+    })
+
+    if (currentFavouritesID.has(pet.id.$t)) {
+      console.log('duplicate exists');
+    } else {
+      dbRef.push({
+        // key: pet.id.$t,
+        id: pet.id.$t,
+        name: pet.name.$t,
+        age: pet.age.$t,
+        breed: pet.breed.$t || [pet.breed[0].$t, pet.breed[1].$t],
+        photo: pet.photo.$t
+      });
+    }
   }
   removeFromFavourites = (petID) => {
     const petDbRef = firebase.database().ref(petID)
