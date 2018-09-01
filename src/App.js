@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import axios from 'axios';
-import Qs from 'qs';
+// import axios from 'axios';
+// import Qs from 'qs';
 import firebase from './firebase';
 
 //Axios Calls
-import { getRandomPetData } from './axios.js';
+import { getRandomPetData, getPetDataByLocation } from './axios.js';
 
 // Components
 import Header from './components/header/Header';
@@ -14,8 +14,8 @@ import Gallery from './components/gallery/Gallery';
 import Favourites from './components/favourites/Favourites';
 import RandomPetButton from './components/random-pet-button/RandomPetButton';
 
-const apiURL = 'https://api.petfinder.com/pet.find';
-const apiKey = '03e269d9ab2bafaf6f5ace0f1ee278f1';
+// const apiURL = 'https://api.petfinder.com/pet.find';
+// const apiKey = '03e269d9ab2bafaf6f5ace0f1ee278f1';
 
 const dbRef = firebase.database().ref();
 
@@ -39,32 +39,7 @@ class App extends Component {
   //NEXT: I must display 5 random pets. Grab Five random animsl from the call. 
   //HOW: Do I pass this calls return to a new component called pet card and map it out?
   returnPetsByLocation = (location) => {
-    axios({
-      url: 'https://proxy.hackeryou.com',
-      method: 'GET',
-      dataResponse: 'json',
-      paramsSerializer: function (params) {
-        return Qs.stringify(params, {
-          arrayFormat: 'brackets'
-        })
-      },
-      params: {
-        reqUrl: apiURL,
-        params: {
-          key: apiKey,
-          format: 'json',
-          output: 'full',
-          location: location,
-          animal: 'dog',
-          count: 10,
-        },
-        proxyHeaders: {
-          'header_params': 'value'
-        },
-        xmlToJSON: false
-      }
-    }).then(({data}) => {
-      //pass data to a randomizer function.
+    getPetDataByLocation(location).then(({data}) => {
       const pets = data.petfinder.pets.pet;
       this.chooseRandomPets(pets);
     })
@@ -130,19 +105,24 @@ class App extends Component {
     petDbRef.remove();
   }
   getRandomPet = () => {
-    console.log('get random pet is called');
     getRandomPetData().then(({data}) => {
       const pet = data.petfinder.pet;
       this.displayRandomPet(pet);
     })
   }
   displayRandomPet = (pet) => {
+    console.log(pet);
+    const photos = pet.media.photos.photo.filter((photo) => {
+      return photo[`@size`] === 'x';
+    });
+
     const randomPet = [{
       id: pet.id,
       name: pet.name,
       age: pet.age,
       breed: pet.breeds.breed,
-      photo: pet.media.photos.photo[0],
+      photo: photos[0],
+      location: pet.contact.city,
     }]
     this.setState({
       randomPet: randomPet,

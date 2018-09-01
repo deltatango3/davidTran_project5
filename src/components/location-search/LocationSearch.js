@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './LocationSearch.css';
+import {getPetDataByLocation} from '../../axios'
 
 // User will be able to input a location.
 // Plug that location into a axios call and return 100 animals that are up for adoption in that area. 
