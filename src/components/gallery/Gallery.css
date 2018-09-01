@@ -6,3 +6,6 @@
   display: flex; }
   .img-container img {
     align-self: flex-start; }
+
+.pet {
+  cursor: pointer; }

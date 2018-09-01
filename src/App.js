@@ -13,6 +13,7 @@ import LocationSearchForm from './components/location-search/LocationSearch';
 import Gallery from './components/gallery/Gallery';
 import Favourites from './components/favourites/Favourites';
 import RandomPetButton from './components/random-pet-button/RandomPetButton';
+import PetCard from './components/pet-card/PetCard';
 
 // const apiURL = 'https://api.petfinder.com/pet.find';
 // const apiKey = '03e269d9ab2bafaf6f5ace0f1ee278f1';
@@ -57,7 +58,6 @@ class App extends Component {
     this.getPetInfo(randomPets);
   }
   getPetInfo = (pets) => {
-    // console.log('get pet info is called')
     const petsArray = pets.map((pet) => {
       const photos = pet.media.photos.photo.filter((photo) => {
         return photo[`@size`] === 'x';
@@ -111,7 +111,6 @@ class App extends Component {
     })
   }
   displayRandomPet = (pet) => {
-    console.log(pet);
     const photos = pet.media.photos.photo.filter((photo) => {
       return photo[`@size`] === 'x';
     });
@@ -128,13 +127,17 @@ class App extends Component {
       randomPet: randomPet,
     })
   }
+  showMorePetInfo = () => {
+    console.log('show more pet info called');
+  }
   render() {
     return (
       <div className="App">
         <Header />
         <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} />
-        <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet}/>
+        <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet} showMorePetInfo={this.showMorePetInfo}/>
         <RandomPetButton getRandomPet={this.getRandomPet}/>
+        <PetCard />
         <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites}/>
       </div>
     );
