@@ -3,7 +3,7 @@ import './PetProfile.css';
 
 const PetProfile = (props) => {
   return(
-    <section className="profile">
+    <section className={`profile ${props.petProfileActive ? 'active' : 'hidden'}`}>
       <h3>Pet Card Here</h3>
         {props.petProfile.map((info) => {
           return(
@@ -21,11 +21,30 @@ const PetProfile = (props) => {
               <p>{info.description.$t}</p>
               <div className="misc-info">
                 <h3>Misc info here</h3>
-                {info.misc[0].map((miscInfo) => {
-                  return (
-                    <p key={miscInfo.$t}>{miscInfo.$t}</p>
-                  )
-                })}
+                <p>
+
+                </p>    
+                {info.misc[0] === undefined ? `Contact for more details` : 
+                  (Array.isArray(info.misc[0]) ? 
+                    info.misc[0].map((miscInfo) => {
+                      return `${miscInfo.$t} `;
+                    }) :
+                    info.misc[0].$t
+                  ) 
+                }
+                {/* {Array.isArray(info.misc) ? 
+                  info.misc[0].map((miscInfo) => {
+                    return (miscInfo[0] === undefined ? `Contact for more details` :
+                      `${miscInfo.$t} `)
+                  }) : info.misc[0].$t
+                } */}
+                {/* {info.misc === undefined ? console.log('there is no misc info') : 
+                  info.misc[0].map((miscInfo) => {
+                    return (
+                      <p key={miscInfo.$t}>{miscInfo.$t}</p>
+                    )
+                  }) 
+                } */}
               </div>
               <div className="contact-info">
                 <h3>Contact Info</h3>

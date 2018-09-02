@@ -25,6 +25,7 @@ class App extends Component {
       petProfile: [],
       visible: false,
       displayType: '',
+      petProfileActive: false,
     }
   }
   componentDidMount() {
@@ -119,6 +120,7 @@ class App extends Component {
     getRandomPetData().then(({data}) => {
       const pet = data.petfinder.pet;
       this.displayRandomPet(pet);
+      console.log(pet);
     })
   }
   displayRandomPet = (pet) => {
@@ -172,12 +174,12 @@ class App extends Component {
       shelterID: pet.shelterID,
       status: pet.status,
     }]
-  this.setState({
-    petProfile
-  })
+    this.setState({
+      petProfile,
+      petProfileActive: true,
+    })
   }
   makeVisible = () => {
-    console.log('toggle class is called');
     // const currentState = this.state.visible;
     this.setState({
       // visible: !currentState,
@@ -194,9 +196,9 @@ class App extends Component {
       <div className="App">
         <Header />
         <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} />
-        <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet} showMorePetInfo={this.showMorePetInfo} displayPetProfile={this.displayPetProfile} visibleState={this.state.visible} displayType={this.state.displayType}/>
+        <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet} showMorePetInfo={this.showMorePetInfo} displayPetProfile={this.displayPetProfile} visibleState={this.state.visible} displayType={this.state.displayType} />
         <RandomPetButton getRandomPet={this.getRandomPet} makeVisible={this.makeVisible} displayType={this.setDisplayType} />
-        <PetProfile petProfile={this.state.petProfile} />
+        <PetProfile petProfile={this.state.petProfile} petProfileActive={this.state.petProfileActive}/>
         <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites} />
       </div>
     );
