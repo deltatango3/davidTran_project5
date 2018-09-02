@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-// import axios from 'axios';
-// import Qs from 'qs';
 import firebase from './firebase';
 
 //Axios Calls
@@ -15,9 +13,6 @@ import Favourites from './components/favourites/Favourites';
 import RandomPetButton from './components/random-pet-button/RandomPetButton';
 import PetProfile from './components/pet-profile/PetProfile';
 
-// const apiURL = 'https://api.petfinder.com/pet.find';
-// const apiKey = '03e269d9ab2bafaf6f5ace0f1ee278f1';
-
 const dbRef = firebase.database().ref();
 
 class App extends Component {
@@ -28,6 +23,8 @@ class App extends Component {
       favouritePets: [],
       randomPet: [],
       petProfile: [],
+      visible: false,
+      displayType: '',
     }
   }
   componentDidMount() {
@@ -179,13 +176,26 @@ class App extends Component {
     petProfile
   })
   }
+  makeVisible = () => {
+    console.log('toggle class is called');
+    // const currentState = this.state.visible;
+    this.setState({
+      // visible: !currentState,
+      visible: true,
+    })
+  }
+  setDisplayType = (displayType) => {
+    this.setState({
+      displayType
+    })
+  }
   render() {
     return (
       <div className="App">
         <Header />
-        <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} />
-        <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet} showMorePetInfo={this.showMorePetInfo}displayPetProfile={this.displayPetProfile} />
-        <RandomPetButton getRandomPet={this.getRandomPet} />
+        <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} />
+        <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet} showMorePetInfo={this.showMorePetInfo} displayPetProfile={this.displayPetProfile} visibleState={this.state.visible} displayType={this.state.displayType}/>
+        <RandomPetButton getRandomPet={this.getRandomPet} makeVisible={this.makeVisible} displayType={this.setDisplayType} />
         <PetProfile petProfile={this.state.petProfile} />
         <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites} />
       </div>

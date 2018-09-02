@@ -22,6 +22,8 @@ class LocationSearchForm extends Component {
     //Pass the location that is submitted back to the APP function that makes the axios call.
     // Make a function in the APP that makes the call
     this.props.returnPetsByLocation(this.state.location);
+    this.props.makeVisible();
+    this.props.setDisplayType('location-pets');
   }
   render() {  
     return(
