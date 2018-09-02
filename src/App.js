@@ -13,7 +13,7 @@ import LocationSearchForm from './components/location-search/LocationSearch';
 import Gallery from './components/gallery/Gallery';
 import Favourites from './components/favourites/Favourites';
 import RandomPetButton from './components/random-pet-button/RandomPetButton';
-import PetCard from './components/pet-card/PetCard';
+import PetProfile from './components/pet-profile/PetProfile';
 
 // const apiURL = 'https://api.petfinder.com/pet.find';
 // const apiKey = '03e269d9ab2bafaf6f5ace0f1ee278f1';
@@ -27,6 +27,7 @@ class App extends Component {
       petList: [],
       favouritePets: [],
       randomPet: [],
+      petProfile: [],
     }
   }
   componentDidMount() {
@@ -68,6 +69,19 @@ class App extends Component {
         age: pet.age,
         breed: pet.breeds.breed,
         photo: photos[0],
+        type: pet.animal,
+        description: pet.description,
+        gender: pet.sex,
+        size: pet.size,
+        address: pet.contact.address1,
+        city: pet.contact.city,
+        state: pet.contact.state,
+        zip: pet.contact.zip,
+        email: pet.contact.email,
+        phone: pet.contact.phone,
+        misc: [pet.options.option],
+        shelterID: pet.shelterId,
+        status: pet.status,
       })
     })
     this.setState({
@@ -122,23 +136,58 @@ class App extends Component {
       breed: pet.breeds.breed,
       photo: photos[0],
       location: pet.contact.city,
+      type: pet.animal,
+      description: pet.description,
+      gender: pet.sex,
+      size: pet.size,
+      address: pet.contact.address1,
+      city: pet.contact.city,
+      state: pet.contact.state,
+      zip: pet.contact.zip,
+      email: pet.contact.email,
+      phone: pet.contact.phone,
+      misc: [pet.options.option],
+      shelterID: pet.shelterId,
+      status: pet.status,
     }]
     this.setState({
-      randomPet: randomPet,
+      randomPet
     })
   }
-  showMorePetInfo = () => {
-    console.log('show more pet info called');
+  displayPetProfile = (pet) => {
+    const petProfile = [{
+      id: pet.id,
+      name: pet.name,
+      age: pet.age,
+      breed: pet.breed,
+      photo: pet.photo,
+      type: pet.type,
+      description: pet.description,
+      gender: pet.gender,
+      size: pet.size,
+      address: pet.address,
+      city: pet.city,
+      state: pet.state,
+      zip: pet.zip,
+      email: pet.email,
+      phone: pet.phone,
+      misc: [pet.misc[0]],
+      shelterID: pet.shelterID,
+      status: pet.status,
+    }]
+  this.setState({
+    petProfile
+  })
   }
   render() {
     return (
       <div className="App">
         <Header />
         <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} />
-        <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet} showMorePetInfo={this.showMorePetInfo}/>
-        <RandomPetButton getRandomPet={this.getRandomPet}/>
-        <PetCard />
-        <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites}/>
+        <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet} showMorePetInfo={this.showMorePetInfo}displayPetProfile={this.displayPetProfile} />
+        <RandomPetButton getRandomPet={this.getRandomPet} />
+        <PetProfile petProfile={this.state.petProfile} />
+        <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites} />
       </div>
     );
   }

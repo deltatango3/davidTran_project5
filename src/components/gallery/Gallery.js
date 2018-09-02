@@ -7,8 +7,8 @@ const Gallery = (props) => {
     <section className = "gallery" >
       <h2>Gallery</h2>
       <div className="gallery-container">
-        <PetTile petList={props.petList} mapItem={props.petList} addToFavourites={props.addToFavourites}/>
-        <PetTile randomPet={props.randomPet} mapItem={props.randomPet} addToFavourites={props.addToFavourites}/>
+        <PetTile petList={props.petList} mapItem={props.petList} addToFavourites={props.addToFavourites} displayPetProfile={props.displayPetProfile}/>
+        <PetTile randomPet={props.randomPet} mapItem={props.randomPet} addToFavourites={props.addToFavourites} displayPetProfile={props.displayPetProfile}/>
       </div>
     </section>
   )

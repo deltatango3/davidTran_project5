@@ -3,10 +3,10 @@ import './PetTile.css';
 
 const PetTile = (props) => {
   return (
-    <div className="pet-card">
+    <div className="pets-wrapper">
     {props.mapItem.map((pet) => {
       return(
-        <div className="random-pet" key={pet.id.$t}>
+        <div className="pet" key={pet.id.$t} onClick={() => {props.displayPetProfile(pet)}}>
           <div className="img-container">
             <img src={pet.photo.$t} alt=""/>
           </div>
