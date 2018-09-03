@@ -20,7 +20,10 @@ header {
       margin-right: 1rem; }
     header .location-search .location-btn {
       padding: 1rem; }
-  header .hide-search {
+  header .hide-search-in-menu {
+    opacity: 0;
     visibility: hidden; }
   header .reveal-search {
-    visibility: visible; }
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 300ms ease; }

@@ -25,10 +25,13 @@ header {
       padding: 1rem;
     }
   }
-  & .hide-search {
+  & .hide-search-in-menu {
+    opacity: 0;
     visibility: hidden;
   }
   & .reveal-search {
     visibility: visible;
+    opacity: 1;
+    transition: opacity 300ms ease;
   }
 }

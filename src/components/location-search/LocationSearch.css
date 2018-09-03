@@ -12,3 +12,6 @@
     width: 50%; }
   .location-search .location-btn {
     background-color: yellow; }
+
+main .location-search.hide-main-search {
+  display: none; }

@@ -9,7 +9,7 @@ const Header = (props) => {
     <header>
       <div className="wrapper">
         <h1>Best Friend Finder</h1>
-        <LocationSearchForm returnPetsByLocation={props.returnPetsByLocation} setDisplayType={props.setDisplayType} buttonText={'Search'} makeVisible={props.makeVisible} visibleState={props.visibleState}/>
+        <LocationSearchForm returnPetsByLocation={props.returnPetsByLocation} setDisplayType={props.setDisplayType} buttonText={'Search'} makeVisible={props.makeVisible} visibleState={props.visibleState} menuSearchVisible={props.menuSearchVisible} revealMenuSearch={props.revealMenuSearch}/>
       </div>
       <ExpandButton revealFavourites={props.revealFavourites}/>
     </header>

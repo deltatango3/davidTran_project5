@@ -24,12 +24,17 @@ class LocationSearchForm extends Component {
     this.props.returnPetsByLocation(this.state.location);
     this.props.makeVisible();
     this.props.setDisplayType('location-pets');
+    this.props.revealMenuSearch();
+  }
+  resetLocationField = (input) => {
+    console.log(input.target.value);
+    input.target.value = '';
   }
   render() {  
     return(
-      <form className={`location-search ${this.props.visibleState === true ? 'reveal-search' : 'hide-search'}`} onSubmit={this.locationSubmit}>
+      <form className={`location-search ${this.props.menuSearchVisible === true ? 'reveal-search hide-main-search' : 'hide-search-in-menu'}`} onSubmit={this.locationSubmit}>
         <label className="placeholder-label" htmlFor="location-search"></label>
-        <input onChange={this.locationChange} className="location-field" id="location" type="text" required placeholder="Location (City, Province)" />
+        <input onChange={this.locationChange} onFocus={this.resetLocationField} className="location-field" id="location" type="text" required placeholder="Location (City, Province)" />
         <input className="location-btn btn" type="submit" value={this.props.buttonText}/>
       </form>
     )

@@ -30,6 +30,7 @@ class App extends Component {
       displayType: '',
       petProfileActive: false,
       favouritesActive: false,
+      menuSearchVisible: false,
     }
   }
   componentDidMount() {
@@ -206,12 +207,17 @@ class App extends Component {
       displayType
     })
   }
+  revealMenuSearch = () => {
+    this.setState({
+      menuSearchVisible: true,
+    })
+  }
   render() {
     return (
       <div className="App">
-        <Header revealFavourites={this.revealFavourites} returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} visibleState={this.state.visible}/>
+        <Header revealFavourites={this.revealFavourites} returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} visibleState={this.state.visible} menuSearchVisible={this.state.menuSearchVisible} revealMenuSearch={this.revealMenuSearch}/>
         <main>
-          <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} buttonText={'Search this location'} />
+          <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} buttonText={'Search this location'} visibleState={this.state.visible} revealMenuSearch={this.revealMenuSearch} menuSearchVisible={this.state.menuSearchVisible}/>
           <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet} showMorePetInfo={this.showMorePetInfo} displayPetProfile={this.displayPetProfile} visibleState={this.state.visible} displayType={this.state.displayType} />
           <RandomPetButton getRandomPet={this.getRandomPet} makeVisible={this.makeVisible} displayType={this.setDisplayType} />
           <PetProfile petProfile={this.state.petProfile} petProfileActive={this.state.petProfileActive}/>
