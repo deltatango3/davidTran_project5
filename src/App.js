@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import './utils.css';
+import './general.css';
+import './typography.css';
 import './App.css';
 import firebase from './firebase';
 
@@ -26,6 +29,7 @@ class App extends Component {
       visible: false,
       displayType: '',
       petProfileActive: false,
+      favouritesActive: false,
     }
   }
   componentDidMount() {
@@ -116,6 +120,17 @@ class App extends Component {
 
     petDbRef.remove();
   }
+  revealFavourites = () => {
+    this.setState({
+      favouritesActive: true,
+    })
+  }
+  closeFavourites = () => {
+    console.log('close favourites called');
+    this.setState({
+      favouritesActive: false,
+    })
+  }
   getRandomPet = () => {
     getRandomPetData().then(({data}) => {
       const pet = data.petfinder.pet;
@@ -194,12 +209,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
-        <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} />
-        <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet} showMorePetInfo={this.showMorePetInfo} displayPetProfile={this.displayPetProfile} visibleState={this.state.visible} displayType={this.state.displayType} />
-        <RandomPetButton getRandomPet={this.getRandomPet} makeVisible={this.makeVisible} displayType={this.setDisplayType} />
-        <PetProfile petProfile={this.state.petProfile} petProfileActive={this.state.petProfileActive}/>
-        <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites} />
+        <Header revealFavourites={this.revealFavourites} returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} visibleState={this.state.visible}/>
+        <main>
+          <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} buttonText={'Search this location'} />
+          <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet} showMorePetInfo={this.showMorePetInfo} displayPetProfile={this.displayPetProfile} visibleState={this.state.visible} displayType={this.state.displayType} />
+          <RandomPetButton getRandomPet={this.getRandomPet} makeVisible={this.makeVisible} displayType={this.setDisplayType} />
+          <PetProfile petProfile={this.state.petProfile} petProfileActive={this.state.petProfileActive}/>
+        </main>
+        <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites} favouritesActive={this.state.favouritesActive} closeFavourites={this.closeFavourites}/>
       </div>
     );
   }

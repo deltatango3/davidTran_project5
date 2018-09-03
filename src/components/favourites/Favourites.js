@@ -1,9 +1,11 @@
 import React from 'react';
 import './Favourites.css';
+import CloseButton from '../close-button/CloseButton';
 
 const Favourites = (props) => {
   return(
-  <section className="Favourites">
+  <section className={`favourites ${props.favouritesActive === true ? 'expand-favourites' : 'close-favourites'}`}>
+    <CloseButton closeFavourites={props.closeFavourites} />
     <h2>Favourites</h2>
     <div className="favourites-container">
       {/* {console.log(Object.entries(props.favouritePets))} */}

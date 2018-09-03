@@ -23,7 +23,8 @@ const PetProfile = (props) => {
                 <h3>Misc info here</h3>
                 <p>
 
-                </p>    
+                </p>
+                {/*Check if the options info is empty(returning an undefined. If not then check if its an array of items or just one object to display)  */}
                 {info.misc[0] === undefined ? `Contact for more details` : 
                   (Array.isArray(info.misc[0]) ? 
                     info.misc[0].map((miscInfo) => {
@@ -32,19 +33,6 @@ const PetProfile = (props) => {
                     info.misc[0].$t
                   ) 
                 }
-                {/* {Array.isArray(info.misc) ? 
-                  info.misc[0].map((miscInfo) => {
-                    return (miscInfo[0] === undefined ? `Contact for more details` :
-                      `${miscInfo.$t} `)
-                  }) : info.misc[0].$t
-                } */}
-                {/* {info.misc === undefined ? console.log('there is no misc info') : 
-                  info.misc[0].map((miscInfo) => {
-                    return (
-                      <p key={miscInfo.$t}>{miscInfo.$t}</p>
-                    )
-                  }) 
-                } */}
               </div>
               <div className="contact-info">
                 <h3>Contact Info</h3>

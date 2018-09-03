@@ -4,8 +4,8 @@ import './LocationSearch.css';
 // User will be able to input a location.
 // Plug that location into a axios call and return 100 animals that are up for adoption in that area. 
 class LocationSearchForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       location: '',
     }
@@ -27,10 +27,10 @@ class LocationSearchForm extends Component {
   }
   render() {  
     return(
-      <form onSubmit={this.locationSubmit}>
-        <label htmlFor="location-search"></label>
-        <input onChange={this.locationChange} id="location" type="text" required placeholder="Location (City, Provice)"/>
-        <input type="submit" value="Search this location"/>
+      <form className={`location-search ${this.props.visibleState === true ? 'reveal-search' : 'hide-search'}`} onSubmit={this.locationSubmit}>
+        <label className="placeholder-label" htmlFor="location-search"></label>
+        <input onChange={this.locationChange} className="location-field" id="location" type="text" required placeholder="Location (City, Province)" />
+        <input className="location-btn btn" type="submit" value={this.props.buttonText}/>
       </form>
     )
   }

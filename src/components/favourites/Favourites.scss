@@ -1,0 +1,20 @@
+.favourites {
+  position: absolute;
+  // width: 95%;
+  left: 100%;
+  height: 100%;
+  transition: all 400ms ease;
+  background-color: tomato;
+}
+
+.close-favourites {
+  // left: 100%;
+  // visibility: hidden;
+  width: 0%
+}
+
+.expand-favourites {
+  left: 10%;
+  display: block;
+  width: 95%;
+}

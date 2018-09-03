@@ -8,7 +8,7 @@ const RandomPetButton = (props) => {
     props.displayType('random-pet');
   }
   return(
-    <button className="btn" onClick={handleClick}>See Random Pet</button>
+    <button className="random-btn btn" onClick={handleClick}>See Random Pet</button>
   );
 }
 
