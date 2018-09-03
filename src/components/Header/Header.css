@@ -3,9 +3,9 @@ header {
   display: flex; }
   header .wrapper {
     display: flex;
-    flex: 1 0 90%; }
+    flex: 1 0 90%;
+    padding: 0 1rem; }
   header h1 {
-    color: #000;
     flex: 1 0 50%; }
   header .location-search {
     flex-direction: row;

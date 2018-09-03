@@ -6,6 +6,7 @@ const RandomPetButton = (props) => {
     props.getRandomPet();
     props.makeVisible();
     props.displayType('random-pet');
+    props.revealMenuSearch();
   }
   return(
     <button className="random-btn btn" onClick={handleClick}>See Random Pet</button>

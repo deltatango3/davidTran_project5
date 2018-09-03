@@ -1,0 +1,38 @@
+.pet-wrapper {
+  border: 2px solid gold;
+  position: relative; }
+
+.pet {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 400px;
+  cursor: pointer;
+  position: relative; }
+  .pet .img-container {
+    display: flex;
+    flex: 1 0 100%;
+    width: 400px;
+    height: 400px;
+    overflow: hidden; }
+    .pet .img-container img {
+      align-self: center; }
+  .pet .pet-info {
+    padding: 1.5rem 1rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #fff; }
+    .pet .pet-info .pet-name {
+      margin-bottom: .5rem;
+      margin-right: 1rem; }
+    .pet .pet-info .pet-blurb {
+      margin-bottom: 0.5rem; }
+
+.like-btn {
+  border: none;
+  width: 100%;
+  padding: 1rem 0;
+  background-color: gold;
+  text-transform: uppercase; }

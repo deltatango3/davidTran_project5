@@ -17,7 +17,6 @@ class LocationSearchForm extends Component {
     })
   }
   locationSubmit = (e) => {
-    console.log('location submit is called')
     e.preventDefault();
     //Pass the location that is submitted back to the APP function that makes the axios call.
     // Make a function in the APP that makes the call
@@ -27,7 +26,6 @@ class LocationSearchForm extends Component {
     this.props.revealMenuSearch();
   }
   resetLocationField = (input) => {
-    console.log(input.target.value);
     input.target.value = '';
   }
   render() {  

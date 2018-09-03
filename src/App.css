@@ -1,8 +1,10 @@
 .App {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  position: relative; }
+  position: relative;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(./assets/juniormya.jpg) no-repeat center;
+  background-size: cover; }
 
 main {
   display: flex;

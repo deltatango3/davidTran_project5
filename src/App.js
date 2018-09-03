@@ -52,7 +52,7 @@ class App extends Component {
   //Returns 5 random pets from the list.
   chooseRandomPets = (pets) => {
     let randomPets = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       let randomIndex = [Math.floor(Math.random() * pets.length)];
       let randomPet = pets[randomIndex];
       randomPets.push(randomPet);
@@ -218,8 +218,11 @@ class App extends Component {
         <Header revealFavourites={this.revealFavourites} returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} visibleState={this.state.visible} menuSearchVisible={this.state.menuSearchVisible} revealMenuSearch={this.revealMenuSearch}/>
         <main>
           <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} buttonText={'Search this location'} visibleState={this.state.visible} revealMenuSearch={this.revealMenuSearch} menuSearchVisible={this.state.menuSearchVisible}/>
+
           <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet} showMorePetInfo={this.showMorePetInfo} displayPetProfile={this.displayPetProfile} visibleState={this.state.visible} displayType={this.state.displayType} />
-          <RandomPetButton getRandomPet={this.getRandomPet} makeVisible={this.makeVisible} displayType={this.setDisplayType} />
+          
+          <RandomPetButton getRandomPet={this.getRandomPet} makeVisible={this.makeVisible} displayType={this.setDisplayType} revealMenuSearch={this.revealMenuSearch}/>
+          
           <PetProfile petProfile={this.state.petProfile} petProfileActive={this.state.petProfileActive}/>
         </main>
         <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites} favouritesActive={this.state.favouritesActive} closeFavourites={this.closeFavourites}/>
