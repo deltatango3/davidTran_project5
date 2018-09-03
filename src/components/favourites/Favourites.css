@@ -3,7 +3,8 @@
   left: 100%;
   height: 100%;
   transition: all 400ms ease;
-  background-color: tomato; }
+  background-color: tomato;
+  overflow: auto; }
 
 .close-favourites {
   width: 0%; }

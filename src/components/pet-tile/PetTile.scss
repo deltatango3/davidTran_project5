@@ -1,5 +1,7 @@
+@import '../../utils.scss';
+
 .pet-wrapper {
-  border: 2px solid gold;
+  border: 2px solid $yellow;
   position: relative;
 }
 .pet {
@@ -25,7 +27,7 @@
     left: 0;
     right: 0;
     background-color: rgba(0,0,0,0.4);
-    color: #fff;
+    color: $white;
     & .pet-name {
       margin-bottom: .5rem;
       margin-right: 1rem;
@@ -40,6 +42,6 @@
   border: none;
   width: 100%;
   padding: 1rem 0;
-  background-color: gold;
+  background-color: $yellow;
   text-transform: uppercase;
 }

@@ -26,7 +26,7 @@ const PetTile = (props) => {
               </div>
             </div>
           </div>
-          <button class="like-btn" onClick={() => {props.addToFavourites(pet)}}>Like</button>
+          <button className="like-btn" onClick={() => {props.addToFavourites(pet)}}>Like</button>
         </div>
       )
     })}

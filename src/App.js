@@ -136,7 +136,6 @@ class App extends Component {
     getRandomPetData().then(({data}) => {
       const pet = data.petfinder.pet;
       this.displayRandomPet(pet);
-      console.log(pet);
     })
   }
   displayRandomPet = (pet) => {
@@ -195,6 +194,12 @@ class App extends Component {
       petProfileActive: true,
     })
   }
+  closePetProfile = () => {
+    console.log('close pet profile called')
+    this.setState({
+      petProfileActive: false,
+    })
+  }
   makeVisible = () => {
     // const currentState = this.state.visible;
     this.setState({
@@ -218,12 +223,15 @@ class App extends Component {
         <Header revealFavourites={this.revealFavourites} returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} visibleState={this.state.visible} menuSearchVisible={this.state.menuSearchVisible} revealMenuSearch={this.revealMenuSearch}/>
         <main>
           <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} buttonText={'Search this location'} visibleState={this.state.visible} revealMenuSearch={this.revealMenuSearch} menuSearchVisible={this.state.menuSearchVisible}/>
+          
+          <span>OR</span>
+          
+          <RandomPetButton getRandomPet={this.getRandomPet} makeVisible={this.makeVisible} displayType={this.setDisplayType} revealMenuSearch={this.revealMenuSearch}/>
 
           <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet} showMorePetInfo={this.showMorePetInfo} displayPetProfile={this.displayPetProfile} visibleState={this.state.visible} displayType={this.state.displayType} />
           
-          <RandomPetButton getRandomPet={this.getRandomPet} makeVisible={this.makeVisible} displayType={this.setDisplayType} revealMenuSearch={this.revealMenuSearch}/>
           
-          <PetProfile petProfile={this.state.petProfile} petProfileActive={this.state.petProfileActive}/>
+          <PetProfile petProfile={this.state.petProfile} petProfileActive={this.state.petProfileActive} closePetProfile={this.closePetProfile}/>
         </main>
         <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites} favouritesActive={this.state.favouritesActive} closeFavourites={this.closeFavourites}/>
       </div>

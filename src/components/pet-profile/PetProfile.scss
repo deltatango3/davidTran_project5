@@ -1,0 +1,52 @@
+.profile {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  .close-btn {
+    color: yellow;
+    position: absolute;
+    right: 10%;
+    top: 5%;
+    font-size: 3rem;
+    font-weight: 600;
+    background: none;
+    border: none;
+  }
+}
+
+.pet-profile {
+  width: 80%;
+  margin: 5% auto;
+  display: flex;
+  flex-wrap: wrap;
+  & .img-container {
+    flex: 1 0 40%;
+  }
+  & .profile-information {
+    background-color: #fff;
+    flex: 1 0 calc(60% - 4rem);
+    padding: 2rem;
+    & .pet-name {
+      font-size: 4rem;
+    }
+    & .description {
+      line-height: 1.5;
+    }
+    & h2, h3 {
+      margin-bottom: 1.5rem;
+      padding-top: 1rem;
+    }
+    &.blurb {
+      font-size: 1.6rem;
+      text-transform: initial;
+    }
+    &.blurb p {
+      margin-bottom: 1rem;
+    }
+  }
+}

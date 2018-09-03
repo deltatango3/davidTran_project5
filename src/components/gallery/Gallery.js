@@ -5,7 +5,6 @@ import PetTile from '../pet-tile/PetTile';
 const Gallery = (props) => {
   return(
     <section className={`gallery ${props.visibleState ? 'active' : 'hidden'}`}>
-      <h2>Gallery</h2>
       <div className="gallery-container">
         <div className={`location-pets ${props.displayType === 'location-pets' ? 'active' : 'hidden'}`}>
           <PetTile petList={props.petList} mapItem={props.petList} addToFavourites={props.addToFavourites} displayPetProfile={props.displayPetProfile}/>

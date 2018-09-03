@@ -1,5 +1,5 @@
 .pet-wrapper {
-  border: 2px solid gold;
+  border: 2px solid #FDCA40;
   position: relative; }
 
 .pet {
@@ -34,5 +34,5 @@
   border: none;
   width: 100%;
   padding: 1rem 0;
-  background-color: gold;
+  background-color: #FDCA40;
   text-transform: uppercase; }
