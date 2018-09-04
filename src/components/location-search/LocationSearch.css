@@ -11,6 +11,9 @@
     margin-bottom: 3rem;
     width: 50%;
     max-width: 300px; }
+    @media (max-width: 550px) {
+      .location-search .location-field {
+        width: 80%; } }
   .location-search .location-btn {
     background-color: #FDCA40; }
 

@@ -112,7 +112,20 @@ class App extends Component {
         name: pet.name.$t,
         age: pet.age.$t,
         breed: pet.breed.$t || [pet.breed[0].$t, pet.breed[1].$t],
-        photo: pet.photo.$t
+        photo: pet.photo.$t,
+        // type: pet.type.$t,
+        // description: pet.description.$t,
+        // gender: pet.gender.$t,
+        // size: pet.size.$t,
+        // address: pet.address.$t,
+        // city: pet.city.$t,
+        // state: pet.state.$t,
+        // zip: pet.zip.$t,
+        // email: pet.email.$t,
+        // phone: pet.phone.$t,
+        // misc: pet.misc.$t || [pet.misc[0].$t],
+        // shelterID: pet.shelterID.$t,
+        // status: pet.status.$t,
       });
     } 
   }
@@ -127,7 +140,6 @@ class App extends Component {
     })
   }
   closeFavourites = () => {
-    console.log('close favourites called');
     this.setState({
       favouritesActive: false,
     })
@@ -186,6 +198,7 @@ class App extends Component {
       email: pet.email,
       phone: pet.phone,
       misc: [pet.misc[0]],
+      // misc: pet.misc,
       shelterID: pet.shelterID,
       status: pet.status,
     }]
@@ -195,15 +208,12 @@ class App extends Component {
     })
   }
   closePetProfile = () => {
-    console.log('close pet profile called')
     this.setState({
       petProfileActive: false,
     })
   }
   makeVisible = () => {
-    // const currentState = this.state.visible;
     this.setState({
-      // visible: !currentState,
       visible: true,
     })
   }
@@ -220,45 +230,23 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header revealFavourites={this.revealFavourites} returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} visibleState={this.state.visible} menuSearchVisible={this.state.menuSearchVisible} revealMenuSearch={this.revealMenuSearch}/>
+        <Header revealFavourites={this.revealFavourites} returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} visibleState={this.state.visible} menuSearchVisible={this.state.menuSearchVisible} revealMenuSearch={this.revealMenuSearch} getRandomPet={this.getRandomPet}/>
         <main>
-          <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} buttonText={'Search this location'} visibleState={this.state.visible} revealMenuSearch={this.revealMenuSearch} menuSearchVisible={this.state.menuSearchVisible}/>
+          <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} buttonText={'Search by Location'} visibleState={this.state.visible} revealMenuSearch={this.revealMenuSearch} menuSearchVisible={this.state.menuSearchVisible}/>
           
-          <span>OR</span>
+          <span className={this.state.menuSearchVisible === true ? 'hidden' : 'active'}>OR</span>
           
-          <RandomPetButton getRandomPet={this.getRandomPet} makeVisible={this.makeVisible} displayType={this.setDisplayType} revealMenuSearch={this.revealMenuSearch}/>
+          <RandomPetButton getRandomPet={this.getRandomPet} makeVisible={this.makeVisible} displayType={this.setDisplayType} revealMenuSearch={this.revealMenuSearch} menuSearchVisible={this.state.menuSearchVisible}/>
 
           <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet} showMorePetInfo={this.showMorePetInfo} displayPetProfile={this.displayPetProfile} visibleState={this.state.visible} displayType={this.state.displayType} />
           
-          
-          <PetProfile petProfile={this.state.petProfile} petProfileActive={this.state.petProfileActive} closePetProfile={this.closePetProfile}/>
+          <PetProfile petProfile={this.state.petProfile} petProfileActive={this.state.petProfileActive} closePetProfile={this.closePetProfile} />
         </main>
-        <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites} favouritesActive={this.state.favouritesActive} closeFavourites={this.closeFavourites}/>
+
+        <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites} favouritesActive={this.state.favouritesActive} closeFavourites={this.closeFavourites} displayPetProfile={this.displayPetProfile}/>
       </div>
     );
   }
 }
 
 export default App;
-
-//Get a random animal
-
-// MVP
-
-// User can submit a location (format: City, Province).
-// API will return a call with 25 (I believe it is default latest updated profile) dogs that are up for adoption in the area.
-// Display 5 dogs randomly.
-//Basic profile will be displayed: name, age, breed, gender, one photo and 
-//User can click 'Read More' to see a profile section with a description, contact information of each animal. 
-// User will be able to randomize again to display 5 dogs randomly. You might see the same twice, leave this as is. Maybe the same dog appearing will signal DESTINY!
-
-// Add a really random button to just see random adoptable pets in the database (worldwide?);
-
-
-//STRETCH
-
-//Favourite an animal, add it to Firebase. User will be able to see a list of animals they have favourited.
-
-// Filter by breed (for dogs only?)
-// Filter by type of animal (or allow toggle of Cats/Both)
-// Find other pets in the same shelter by making another call to get the Shelter list. Display the dogs in that list.

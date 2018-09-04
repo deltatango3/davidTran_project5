@@ -1,0 +1,9 @@
+@import '../../utils.scss';
+
+.close-btn {
+  font-size: 4rem;
+  font-weight: 600;
+  @media (max-width: $mobile) {
+    margin-left: 1rem;
+  }
+}

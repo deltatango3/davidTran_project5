@@ -3,6 +3,20 @@
 .pet-wrapper {
   border: 2px solid $yellow;
   position: relative;
+  margin: 0 1rem 2rem 0;
+  flex: 1 0 calc(33% - 2rem);
+  @media (max-width: $tablet) {
+    flex-basis: calc(50% - 2rem);
+  }
+  @media (max-width: $mobile) {
+    flex-basis: 100%;
+  }
+  &:nth-child(3n) {
+    margin-right: 0;
+    @media (max-width: $tablet) {
+      margin-right: 1rem;
+    }
+  }
 }
 .pet {
   display: flex;
@@ -16,6 +30,9 @@
     width: 400px;
     height: 400px;
     overflow: hidden;
+    @media (max-width: $mobile) {
+      height: 300px;
+    }
     & img {
       align-self: center;
     }
@@ -38,7 +55,7 @@
   }
 }
 
-.like-btn {
+.favourite-btn {
   border: none;
   width: 100%;
   padding: 1rem 0;

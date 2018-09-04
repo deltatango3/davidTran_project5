@@ -9,6 +9,12 @@ img {
   display: block;
 }
 
+button {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
 .wrapper {
   max-width: 1200px;
   margin: 0 auto;
@@ -25,4 +31,14 @@ img {
 
 .active {
   display: block;
+}
+
+.visible {
+  opacity: 1;
+  visibility: visibile;
+}
+
+.invisible {
+  opacity: 0;
+  visibility: hidden;
 }

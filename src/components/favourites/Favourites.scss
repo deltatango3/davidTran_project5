@@ -1,16 +1,44 @@
+@import '../../utils.scss';
+
 .favourites {
   position: absolute;
   // width: 95%;
   left: 100%;
   height: 100%;
   transition: all 400ms ease;
-  background-color: tomato;
+  background-color: $white;
   overflow: auto;
+  border-radius: 15px;
+  & h2 {
+    margin: 2rem 0; 
+    @media (max-width: $mobile) {
+      margin-left: 1rem;
+    }
+  }
+}
+
+.favourites-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(95% - 3rem);
+  justify-content: center;
+  padding-bottom: 3rem;
+  @media (max-width: $mobile) {
+    width: 100%;
+  }
+  & .pet-wrapper {
+    flex: 0 0 350px;
+    @media (max-width: $mobile) {
+      margin: 0 0 2rem 0;
+      flex-basis: 300px;
+    }
+  }
+  & .pet .img-container {
+    width: initial;
+  }
 }
 
 .close-favourites {
-  // left: 100%;
-  // visibility: hidden;
   width: 0%
 }
 
@@ -18,4 +46,11 @@
   left: 10%;
   display: block;
   width: 95%;
+  padding: 1rem 2rem 2rem;
+  @media (max-width: $mobile) {
+    left: 0;
+    width: 100%;
+    padding: 1rem 0 2rem;
+  }
 }
+

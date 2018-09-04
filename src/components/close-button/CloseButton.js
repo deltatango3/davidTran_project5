@@ -1,8 +1,9 @@
 import React from 'react';
+import './CloseButton.css'
 
 const CloseButton = (props) => {
   return (
-    <button onClick={props.closeFavourites} className="round-btn close-btn" title="Close Favourites">Close</button>
+    <button onClick={props.closeFavourites} className="close-btn" title="Close Favourites">&times;</button>
   )
 }
 

@@ -9,7 +9,7 @@ const RandomPetButton = (props) => {
     props.revealMenuSearch();
   }
   return(
-    <button className="random-btn btn" onClick={handleClick}>See Random Pet</button>
+    <button className={`random-btn btn ${props.menuSearchVisible === true ? 'hidden reveal-random-btn': 'active'}`} onClick={handleClick}>Random Friend</button>
   );
 }
 

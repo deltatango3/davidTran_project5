@@ -1,0 +1,6 @@
+.close-btn {
+  font-size: 4rem;
+  font-weight: 600; }
+  @media (max-width: 550px) {
+    .close-btn {
+      margin-left: 1rem; } }

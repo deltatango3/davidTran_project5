@@ -12,24 +12,28 @@ const Favourites = (props) => {
       {props.favouritePets ? 
         Object.entries(props.favouritePets).map((pet) => {
           return(
-            <div className="pet" key={pet[0]}>
-              <div className="img-container">
-                <img src={pet[1].photo} alt=""/>
+            <div className="pet-wrapper">
+              <div className="pet" key={pet[0]}>
+                <div className="img-container">
+                  <img src={pet[1].photo} alt=""/>
+                </div>
+                <div className="pet-info">
+                  <h3>{pet[1].name}</h3>
+                  <p>{pet[1].age}</p>
+                  {/* Checking if the returned pet has multiple breeds in an array */}
+                  <p>Breed(s): {Array.isArray(pet[1].breed) ?
+                    pet[1].breed.map((breeds) => {
+                      return `${breeds} `;
+                    })
+                    : pet[1].breed
+                    }</p>
+                    {/* Click To add to favourites */}
+                  </div>
               </div>
-              <h3>{pet[1].name}</h3>
-              <p>{pet[1].age}</p>
-              {/* Checking if the returned pet has multiple breeds in an array */}
-              <p>Breed(s): {Array.isArray(pet[1].breed) ?
-                pet[1].breed.map((breeds) => {
-                  return `${breeds} `;
-                })
-                : pet[1].breed
-                }</p>
-                {/* Click To add to favourites */}
-                <button onClick={() => {props.removeFromFavourites(pet[0])}} id={pet[0]}>Remove</button>
+              <button className="favourite-btn" onClick={() => {props.removeFromFavourites(pet[0])}} id={pet[0]}>Remove</button>
             </div>
           )
-        }) : <p>No Pets</p>
+        }) : <p className="favourites-blurb">You have no favourite pets yet!</p>
       }
     </div>
   </section>

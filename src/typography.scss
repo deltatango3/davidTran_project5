@@ -1,3 +1,5 @@
+@import './utils.scss';
+
 html {
   font-size: 62.5%;
 }
@@ -10,7 +12,12 @@ h1 {
   text-transform: uppercase;
   font-size: 2rem;
   letter-spacing: 1.6px;
-  color: #fff;
+  color: $black;
+}
+
+h2 {
+  color: $black;
+  font-size: 3rem;
 }
 
 .location-field {
@@ -28,4 +35,9 @@ h1 {
   font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.favourites-blurb {
+  font-size: 2rem;
+  font-weight: 600;
 }

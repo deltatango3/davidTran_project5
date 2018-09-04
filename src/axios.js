@@ -23,7 +23,7 @@ export const getPetDataByLocation = (location) => {
         output: 'full',
         location: location,
         animal: 'dog',
-        count: 10,
+        count: 100,
       },
       proxyHeaders: {
         'header_params': 'value'

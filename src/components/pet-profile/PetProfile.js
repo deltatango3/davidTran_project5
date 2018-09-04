@@ -5,7 +5,6 @@ const PetProfile = (props) => {
   return(
     <section className={`profile ${props.petProfileActive ? 'active' : 'hidden'}`}>
       <button className="close-btn" onClick={props.closePetProfile}>&times;</button>
-      <h3>Pet Card Here</h3>
         {props.petProfile.map((info) => {
           return(
             <div className="pet-profile" key={info.id.$t}>

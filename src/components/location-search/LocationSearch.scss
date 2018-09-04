@@ -13,6 +13,9 @@
     margin-bottom: 3rem;
     width: 50%;
     max-width: 300px;
+    @media (max-width: $mobile) {
+      width: 80%;
+    }
   }
   .location-btn {
     background-color: $yellow;

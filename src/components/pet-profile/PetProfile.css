@@ -8,9 +8,9 @@
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4); }
   .profile .close-btn {
-    color: yellow;
+    color: #FDCA40;
     position: absolute;
-    right: 10%;
+    right: 5%;
     top: 5%;
     font-size: 3rem;
     font-weight: 600;
@@ -22,8 +22,16 @@
   margin: 5% auto;
   display: flex;
   flex-wrap: wrap; }
+  @media (max-width: 550px) {
+    .pet-profile {
+      width: 95%; } }
   .pet-profile .img-container {
     flex: 1 0 40%; }
+    @media (max-width: 800px) {
+      .pet-profile .img-container {
+        flex-basis: 100%;
+        display: flex;
+        align-items: center; } }
   .pet-profile .profile-information {
     background-color: #fff;
     flex: 1 0 calc(60% - 4rem);

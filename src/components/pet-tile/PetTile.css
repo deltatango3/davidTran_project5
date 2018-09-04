@@ -1,6 +1,19 @@
 .pet-wrapper {
   border: 2px solid #FDCA40;
-  position: relative; }
+  position: relative;
+  margin: 0 1rem 2rem 0;
+  flex: 1 0 calc(33% - 2rem); }
+  @media (max-width: 800px) {
+    .pet-wrapper {
+      flex-basis: calc(50% - 2rem); } }
+  @media (max-width: 550px) {
+    .pet-wrapper {
+      flex-basis: 100%; } }
+  .pet-wrapper:nth-child(3n) {
+    margin-right: 0; }
+    @media (max-width: 800px) {
+      .pet-wrapper:nth-child(3n) {
+        margin-right: 1rem; } }
 
 .pet {
   display: flex;
@@ -14,6 +27,9 @@
     width: 400px;
     height: 400px;
     overflow: hidden; }
+    @media (max-width: 550px) {
+      .pet .img-container {
+        height: 300px; } }
     .pet .img-container img {
       align-self: center; }
   .pet .pet-info {
@@ -30,7 +46,7 @@
     .pet .pet-info .pet-blurb {
       margin-bottom: 0.5rem; }
 
-.like-btn {
+.favourite-btn {
   border: none;
   width: 100%;
   padding: 1rem 0;

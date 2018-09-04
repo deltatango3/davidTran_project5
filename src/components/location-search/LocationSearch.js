@@ -30,7 +30,7 @@ class LocationSearchForm extends Component {
   }
   render() {  
     return(
-      <form className={`location-search ${this.props.menuSearchVisible === true ? 'reveal-search hide-main-search' : 'hide-search-in-menu'}`} onSubmit={this.locationSubmit}>
+      <form className={`location-search ${this.props.menuSearchVisible === true ? 'hide-main-search' : 'hide-search-in-menu'}`} onSubmit={this.locationSubmit}>
         <label className="placeholder-label" htmlFor="location-search"></label>
         <input onChange={this.locationChange} onFocus={this.resetLocationField} className="location-field" id="location" type="text" required placeholder="Location (City, Province)" />
         <input className="location-btn btn" type="submit" value={this.props.buttonText}/>
