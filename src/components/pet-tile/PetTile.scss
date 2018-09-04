@@ -5,6 +5,7 @@
   position: relative;
   margin: 0 1rem 2rem 0;
   flex: 1 0 calc(33% - 2rem);
+  box-sizing: border-box;
   @media (max-width: $tablet) {
     flex-basis: calc(50% - 2rem);
   }
@@ -61,4 +62,11 @@
   padding: 1rem 0;
   background-color: $yellow;
   text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  transition: all 300ms ease;
+  &:hover {
+    background-color: $black;
+    color: $yellow;
+  }
 }

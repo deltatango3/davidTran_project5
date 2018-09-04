@@ -10,7 +10,7 @@ const Header = (props) => {
     <header>
         <div className="top">
           <div className="wrapper">
-            <h1>Best Friend Finder</h1>
+            <h1>Up Dog</h1>
             <ExpandButton revealFavourites={props.revealFavourites}/>
           </div>
         </div>

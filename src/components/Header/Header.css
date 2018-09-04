@@ -1,7 +1,6 @@
 header .wrapper {
   display: flex;
   flex: 1 0 90%;
-  padding: 0 1rem;
   flex-wrap: wrap;
   align-items: center; }
 

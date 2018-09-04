@@ -27,8 +27,9 @@
       .favourites-container .pet-wrapper {
         margin: 0 0 2rem 0;
         flex-basis: 300px; } }
-  .favourites-container .pet .img-container {
-    width: initial; }
+  @media (max-width: 550px) {
+    .favourites-container .pet .img-container {
+      width: initial; } }
 
 .close-favourites {
   width: 0%; }

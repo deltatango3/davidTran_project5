@@ -118,6 +118,9 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   border: 0;
   padding: 0; }
 
+body {
+  font-family: "Open Sans", sans-serif; }
+
 h1, h2, h3, p {
   margin: 0; }
 

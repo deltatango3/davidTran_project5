@@ -1,3 +1,10 @@
 .random-btn {
   background-color: #fff;
-  color: #080708; }
+  color: #080708;
+  transition: all 300ms ease;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 600; }
+  .random-btn:hover {
+    background-color: #080708;
+    color: #FDCA40; }

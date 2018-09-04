@@ -240,7 +240,7 @@ class App extends Component {
 
           <Gallery addToFavourites={this.addToFavourites} petList={this.state.petList} randomPet={this.state.randomPet} showMorePetInfo={this.showMorePetInfo} displayPetProfile={this.displayPetProfile} visibleState={this.state.visible} displayType={this.state.displayType} />
           
-          <PetProfile petProfile={this.state.petProfile} petProfileActive={this.state.petProfileActive} closePetProfile={this.closePetProfile} />
+          <PetProfile petProfile={this.state.petProfile} petProfileActive={this.state.petProfileActive} closePetProfile={this.closePetProfile} addToFavourites={this.addToFavourites} />
         </main>
 
         <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites} favouritesActive={this.state.favouritesActive} closeFavourites={this.closeFavourites} displayPetProfile={this.displayPetProfile}/>

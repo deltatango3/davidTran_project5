@@ -34,7 +34,9 @@
     }
   }
   & .pet .img-container {
-    width: initial;
+    @media(max-width: $mobile) {
+      width: initial;
+    }
   }
 }
 

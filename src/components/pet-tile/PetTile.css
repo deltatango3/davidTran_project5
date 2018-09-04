@@ -2,7 +2,8 @@
   border: 2px solid #FDCA40;
   position: relative;
   margin: 0 1rem 2rem 0;
-  flex: 1 0 calc(33% - 2rem); }
+  flex: 1 0 calc(33% - 2rem);
+  box-sizing: border-box; }
   @media (max-width: 800px) {
     .pet-wrapper {
       flex-basis: calc(50% - 2rem); } }
@@ -51,4 +52,10 @@
   width: 100%;
   padding: 1rem 0;
   background-color: #FDCA40;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  transition: all 300ms ease; }
+  .favourite-btn:hover {
+    background-color: #080708;
+    color: #FDCA40; }
