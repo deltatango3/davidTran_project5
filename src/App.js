@@ -104,30 +104,31 @@ class App extends Component {
         })
       }
     })
-
     if (!currentFavouritesID.has(pet.id.$t)) {
       dbRef.push({
-        // key: pet.id.$t,
         id: pet.id.$t,
         name: pet.name.$t,
         age: pet.age.$t,
         breed: pet.breed.$t || [pet.breed[0].$t, pet.breed[1].$t],
         photo: pet.photo.$t,
-        // type: pet.type.$t,
-        // description: pet.description.$t,
-        // gender: pet.gender.$t,
-        // size: pet.size.$t,
-        // address: pet.address.$t,
-        // city: pet.city.$t,
-        // state: pet.state.$t,
-        // zip: pet.zip.$t,
-        // email: pet.email.$t,
-        // phone: pet.phone.$t,
-        // misc: pet.misc.$t || [pet.misc[0].$t],
-        // shelterID: pet.shelterID.$t,
-        // status: pet.status.$t,
+        address: pet.address.$t ? pet.address.$t : '',
+        type: pet.type.$t ? pet.type.$t : '',
+        description: pet.description.$t ? pet.description.$t : '',
+        gender: pet.gender.$t ? pet.gender.$t : '',
+        size: pet.size.$t ? pet.size.$t : '',
+        city: pet.city.$t ? pet.city.$t : '',
+        state: pet.state.$t ? pet.state.$t : '',
+        zip: pet.zip.$t ? pet.zip.$t : '',
+        email: pet.email.$t ? pet.email.$t : '',
+        phone: pet.phone.$t ? pet.phone.$t : '',
+        // misc: !pet.misc[0] === undefined ? pet.misc[0].map((misc) => {
+        //   console.log(misc);
+        //   return misc;
+        // }) : '',
+        shelterID: pet.shelterID.$t ? pet.shelterID.$t : '',
+        status: pet.status.$t ? pet.status.$t : '',
       });
-    } 
+    }
   }
   removeFromFavourites = (petID) => {
     const petDbRef = firebase.database().ref(petID)
@@ -243,7 +244,7 @@ class App extends Component {
           <PetProfile petProfile={this.state.petProfile} petProfileActive={this.state.petProfileActive} closePetProfile={this.closePetProfile} addToFavourites={this.addToFavourites} />
         </main>
 
-        <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites} favouritesActive={this.state.favouritesActive} closeFavourites={this.closeFavourites} displayPetProfile={this.displayPetProfile}/>
+        <Favourites favouritePets={this.state.favouritePets} removeFromFavourites={this.removeFromFavourites} favouritesActive={this.state.favouritesActive} closeFavourites={this.closeFavourites} displayPetProfile={this.displayPetProfile} closePetProfile={this.closePetProfile}/>
       </div>
     );
   }

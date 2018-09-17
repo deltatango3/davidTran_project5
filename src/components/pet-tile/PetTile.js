@@ -5,7 +5,6 @@ const PetTile = (props) => {
   return (
     <div className="pets-wrapper wrapper">
     {props.mapItem.map((pet) => {
-      console.log(pet);
       return(
         <div className="pet-wrapper" key={pet.id.$t}>
           <div className="pet" onClick={() => {props.displayPetProfile(pet)}}>
