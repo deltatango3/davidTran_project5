@@ -235,7 +235,6 @@ class App extends Component {
     })
   }
   destroyStates = () => {
-    console.log('destroyStates called');
     this.setState({
       petList: [],
       randomPet: [],

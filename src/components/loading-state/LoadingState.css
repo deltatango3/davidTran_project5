@@ -1,2 +1,5 @@
 .loading-container {
   width: 10%; }
+  @media (max-width: 550px) {
+    .loading-container {
+      width: 50%; } }

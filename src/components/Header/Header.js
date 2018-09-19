@@ -17,6 +17,7 @@ const Header = (props) => {
         <div className={`cta-wrapper bottom ${props.menuSearchVisible === true ? 'visible' : 'invisible'}`}>
           <div className="wrapper">
             <RandomPetButton getRandomPet={props.getRandomPet} displayType={props.setDisplayType} makeVisible={props.makeVisible} revealMenuSearch={props.revealMenuSearch}/>
+            
             <LocationSearchForm returnPetsByLocation={props.returnPetsByLocation} setDisplayType={props.setDisplayType} buttonText={'Search'} makeVisible={props.makeVisible} visibleState={props.visibleState} menuSearchVisible={props.menuSearchVisible} revealMenuSearch={props.revealMenuSearch}/>
           </div>
         </div>
