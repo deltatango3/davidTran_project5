@@ -15,6 +15,7 @@ import Gallery from './components/gallery/Gallery';
 import Favourites from './components/favourites/Favourites';
 import RandomPetButton from './components/random-pet-button/RandomPetButton';
 import PetProfile from './components/pet-profile/PetProfile';
+import LoadingState from './components/loading-state/LoadingState';
 
 const dbRef = firebase.database().ref();
 
@@ -31,6 +32,7 @@ class App extends Component {
       petProfileActive: false,
       favouritesActive: false,
       menuSearchVisible: false,
+      loadingState: false,
     }
   }
   componentDidMount() {
@@ -44,6 +46,7 @@ class App extends Component {
   //NEXT: I must display 5 random pets. Grab Five random animsl from the call. 
   //HOW: Do I pass this calls return to a new component called pet card and map it out?
   returnPetsByLocation = (location) => {
+    this.destroyStates();
     getPetDataByLocation(location).then(({data}) => {
       const pets = data.petfinder.pets.pet;
       this.chooseRandomPets(pets);
@@ -88,7 +91,8 @@ class App extends Component {
       })
     })
     this.setState({
-      petList: petsArray
+      petList: petsArray,
+      loadingState: false,
     })
   }
   addToFavourites = (pet) => {
@@ -146,6 +150,7 @@ class App extends Component {
     })
   }
   getRandomPet = () => {
+    this.destroyStates();
     getRandomPetData().then(({data}) => {
       const pet = data.petfinder.pet;
       this.displayRandomPet(pet);
@@ -178,7 +183,8 @@ class App extends Component {
       status: pet.status,
     }]
     this.setState({
-      randomPet
+      randomPet,
+      loadingState: false,
     })
   }
   displayPetProfile = (pet) => {
@@ -228,13 +234,23 @@ class App extends Component {
       menuSearchVisible: true,
     })
   }
+  destroyStates = () => {
+    console.log('destroyStates called');
+    this.setState({
+      petList: [],
+      randomPet: [],
+      loadingState: true,
+    })
+  }
   render() {
     return (
       <div className="App">
         <Header revealFavourites={this.revealFavourites} returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} visibleState={this.state.visible} menuSearchVisible={this.state.menuSearchVisible} revealMenuSearch={this.revealMenuSearch} getRandomPet={this.getRandomPet}/>
         <main>
           <LocationSearchForm returnPetsByLocation={this.returnPetsByLocation} makeVisible={this.makeVisible} setDisplayType={this.setDisplayType} buttonText={'Search by Location'} visibleState={this.state.visible} revealMenuSearch={this.revealMenuSearch} menuSearchVisible={this.state.menuSearchVisible}/>
-          
+
+          {this.state.loadingState ? <LoadingState/> : null}
+
           <span className={this.state.menuSearchVisible === true ? 'hidden' : 'active'}>OR</span>
           
           <RandomPetButton getRandomPet={this.getRandomPet} makeVisible={this.makeVisible} displayType={this.setDisplayType} revealMenuSearch={this.revealMenuSearch} menuSearchVisible={this.state.menuSearchVisible}/>

@@ -31,8 +31,6 @@
     @media (max-width: 550px) {
       .pet .img-container {
         height: 300px; } }
-    .pet .img-container img {
-      align-self: center; }
   .pet .pet-info {
     padding: 1.5rem 1rem;
     position: absolute;
